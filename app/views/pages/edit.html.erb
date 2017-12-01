@@ -1,0 +1,9 @@
+<h1>Editing Page</h1>
+
+<%= render 'form', page: @page %>
+<script>
+  CKEDITOR.replace('page[content]');
+</script>
+
+<%= link_to 'Show', page_path %> |
+<%= link_to 'Back', pages_path %>

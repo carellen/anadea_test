@@ -1,0 +1,61 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Pages</h1>
+
+<div class="menu">
+  <div id="list">
+<table id="body" class="table table-hover">
+
+  <thead>
+    <tr>
+      <th>Menu label</th>
+      <th>Published at</th>
+      <th>Priority</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody >
+     <% @pages.each do |page| %>
+      <tr>
+        <td><%= link_to page.menu_label, page.slug %></td>
+        <td><%= page.published_at %></td>
+        <td><%= page.priority %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+  </div>
+  <div class="form-inline">
+    <input id="toggle-on" class="toggle toggle-left" name="toggle" value="false" type="radio" checked>
+    <label for="toggle-on" class="btn">Published</label>
+    <input id="toggle-off" class="toggle toggle-right" name="toggle" value="true" type="radio">
+    <label for="toggle-off" class="btn">All</label>
+
+
+    <script>
+        $('.toggle').click(function() {
+            var checked;
+            if ($(this).attr('id') == 'toggle-on') {
+                checked = true;
+            } else {
+                checked = false;
+            }
+            alert(checked);
+            $.ajax({
+                type: "GET",
+                url: "/",
+                data: {checked: checked},
+                success: function(data) {
+                    $('#list').html($(data).find('#body'));
+                }
+            })
+
+            });
+    </script>
+  </div>
+
+</div>
+<br>
+
+<%= link_to 'New Page', new_page_path %>

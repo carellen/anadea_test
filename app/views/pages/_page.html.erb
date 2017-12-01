@@ -1,0 +1,7 @@
+<% @pages.each do |page| %>
+    <tr>
+      <td><%= link_to page.menu_label, page.slug %></td>
+      <td><%= page.published_at %></td>
+      <td><%= page.priority %></td>
+    </tr>
+<% end %>
